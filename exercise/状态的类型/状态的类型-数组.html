@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title></title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+ 
+<div id="example"></div>
+
+<script type="text/babel">
+
+// 方法一
+var books = this.state.bools;
+this.setState({
+  books: books.concat(['1']);
+})
+
+// 方法二
+this.setState(preState => ({
+  books: preState.books.concat(['2'])
+}))
+
+// 方法三
+this.setState(preState => ({
+  books: [...preState.books, '3']
+}))
+
+</script>
+ 
+</body>
+</html>

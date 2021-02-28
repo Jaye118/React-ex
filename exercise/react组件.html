@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>react</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+ 
+<div id="example"></div>
+
+<script type="text/babel">
+
+function HellowMessage(props) {
+  return (
+    <div>
+      封装一个组件 HellowMessage
+    </div>
+  )
+}
+
+class Welcome extends React.Component {
+  render() {
+    return <h1>hhhhhhh</h1>
+  }
+}
+
+const element = <HellowMessage />;
+
+ReactDOM.render(
+  element,
+  document.getElementById('example')
+)
+
+</script>
+ 
+</body>
+</html>

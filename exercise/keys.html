@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title></title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+ 
+<div id="example"></div>
+
+<script type="text/babel">
+
+
+/*
+  用keys提取组件
+  元素的 key 只有在它和它的兄弟节点对比时才有意义。
+  比方说，如果你提取出一个 ListItem 组件，你应该把 key 保存在数组中的这个 <ListItem /> 元素上，而不是放在 ListItem 组件中的 <li> 元素上。
+*/
+
+function ListItem(props) {
+  return <li>{props.value}</li>;
+}
+
+function  NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) => 
+    <ListItem key={number.toString()} value={number} />
+      {number}
+    </ListItem>
+  )
+  return (
+    <ul>{listItems}</ul>
+  )
+}
+
+const numbers = [1, 2, 3, 4, 5, 6]
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.getElementById('example')
+)
+
+</script>
+ 
+</body>
+</html>

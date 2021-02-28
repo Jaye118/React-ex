@@ -1,0 +1,31 @@
+# node 相关缓存文件
+node_modules/
+# 使用 yarn.lock
+package-lock.json
+# yarn运行时报错日志
+yarn-error.log*
+# node 运行时报错
+report.*.json
+
+# python、node 等常见打包工具一般输出路径都是 build、dist，我们自己的代码要避免这两个目录名
+build/
+# dist/
+
+# 我们约定如果要使用本地存储，MEDIA_ROOT 总是指向 data/ 目录
+/data/
+
+# 项目本地虚拟环境
+/.venv/
+
+# 日志目录
+/.log/
+
+# 其它
+## 忽略 IDE 配置文件
+.idea/
+.vscode/
+# macOS 目录定制信息
+.DS_Store/
+
+# 如果使用 celery-beat，会产生该文件，保存 beat 信息
+/celerybeat-schedule

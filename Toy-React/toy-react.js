@@ -9,7 +9,11 @@ class ElementWrapper {
     if (name.match(/^on([\s\S]+)$/)) {
       this.root.addEventListener(RegExp.$1.replace(/^[\s\S]/, c => c.toLowerCase()), value);
     } else {
-      this.root.setAttribute(name, value)
+      if (name === 'className') {
+        this.root.setAttribute('class', value)
+      } else {
+        this.root.setAttribute(name, value)
+      }
     }
   }
   appendChild(component) {
@@ -51,13 +55,21 @@ export class Component {
   // 私有函数：用来调用具体位置
   // element 不够精确；DOM API 里的 Range API 是精确位置
   [RENDER_TO_DOM](range) {
-    this._range = range
+    this._range = range;
     this.render()[RENDER_TO_DOM](range) // 递归
   }
   // 重新绘制
   rerender () {
-    this._range.deleteContents();
-    this[RENDER_TO_DOM](this._range);
+    let oldRange = this._range;
+
+    // 创建新的 range
+    let range = document.createRange();
+    range.setStart(oldRange.startContainer, oldRange.startOffset)
+    range.setEnd(oldRange.startContainer, oldRange.startOffset) // 没有范围的点
+    this[RENDER_TO_DOM](range);
+
+    oldRange.setStart(range.endContainer, range.endOffset)
+    oldRange.deleteContents();
   }
   setState (newState) {
     // 当 this.state 不是对象时
@@ -96,6 +108,9 @@ export function createElement (type, attributes, ...children) {
     for (let child of children) {
       if (typeof child === 'string') {
         child = new TextWrapper(child)
+      }
+      if (typeof child === null) {
+        continue;
       }
       if ((typeof child === 'object') && (child instanceof Array)) {
         insertChildren(child)
